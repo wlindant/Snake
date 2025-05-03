@@ -4,6 +4,7 @@ from pygame.math import Vector2
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5,10), Vector2(6,10), Vector2(7,10)]
+        self.direction = Vector2(1,0)
 
     def draw_snake(self):
         for block in self.body:
@@ -11,6 +12,11 @@ class SNAKE:
             y_pos = int(block.y * cell_size)
             block_rect = pygame.Rect(x_pos, y_pos, cell_size, cell_size)
             pygame.draw.rect(screen,(0,0,114), block_rect)
+
+    def move_snake(self):
+        body_copy = self.body[:-1]
+        body_copy.insert(0,body_copy[0] + self.direction)
+        self.body = body_copy[:]
 
 class FRUIT():
     def __init__(self):
